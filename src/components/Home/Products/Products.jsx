@@ -9,11 +9,11 @@ const Products = () => {
   return (
     <div className="sub-container" id="products">
       {store.state.categories.map((category) => (
-        <div key={category.id} className="category">
-          <h2>{category.name || "Unknown Category"}</h2>
+        <div key={category.category} className="category">
+          <h2>{category.category || "Unknown Category"}</h2>
           <div className="contains-product">
-            {category.productDtos.map((product) => (
-              <Product key={product.id} product={product} />
+            {category.items.map((product) => (
+              <Product key={product.productId} product={product} />
             ))}
           </div>
         </div>

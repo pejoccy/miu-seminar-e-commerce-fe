@@ -23,9 +23,9 @@ const Links = () => {
       <Link to={"/#products"} onClick={scrollToProducts}>
         What's New
       </Link>
-      <Link to={"/delivery"} onClick={removeExpandedClass}>
+      {/* <Link to={"/delivery"} onClick={removeExpandedClass}>
         Delivery
-      </Link>
+      </Link> */}
     </div>
   );
 };

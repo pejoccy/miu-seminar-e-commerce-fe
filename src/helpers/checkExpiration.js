@@ -20,7 +20,10 @@ const getUserFromLocalStorage = () => {
     localStorage.removeItem("user");
     return null;
   }
+  console.log("user", user);
+
   return user;
 };
 
-export { setExpirationDate, getUserFromLocalStorage };
+export { getUserFromLocalStorage, setExpirationDate };
+

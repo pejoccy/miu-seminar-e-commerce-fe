@@ -7,6 +7,7 @@ import { useGlobalContext } from "./components/GlobalContext/GlobalContext";
 import CancelOrder from "./components/Modals/CancelOrder";
 import Modal from "./components/Modals/Modal";
 import NavBar from "./components/NavBar/NavBar";
+import SearchPage from "./components/NavBar/Search/SearchPage";
 import CartView from "./views/CartView";
 import DeliveryView from "./views/DeliveryView";
 import ErrorView from "./views/ErrorView";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/cart" element={<CartView />} />
           <Route path="/delivery" element={<DeliveryView />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="*" element={<ErrorView />} />
         </Routes>
         <footer>

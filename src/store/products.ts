@@ -36,10 +36,10 @@ const reducer = (state: State, action: Action): State => {
 
     case ActionTypes.ADD_TO_CART: {
       const categoryContainingProduct = state.categories.find(category =>
-        category.productDtos.some(product => product.id === action.product)
+        category.items.some(product => product.productId === action.product)
       );
       if (!categoryContainingProduct) return state;
-      const productToAdd = categoryContainingProduct.productDtos.find(product => product.id === action.product);
+      const productToAdd = categoryContainingProduct.items.find(product => product.productId === action.product);
       if (!productToAdd) return state;
       productToAdd.addedToCart = true;
       productToAdd.quantity = 1;
@@ -54,20 +54,20 @@ const reducer = (state: State, action: Action): State => {
 
     case ActionTypes.REMOVE_FROM_CART: {
       const categoryContainingProduct = state.categories.find(category =>
-        category.productDtos.some(product => product.id === action.product)
+        category.items.some(product => product.productId === action.product)
       );
       if (!categoryContainingProduct) return state;
-      const productToRemove = categoryContainingProduct.productDtos.find(product => product.id === action.product);
+      const productToRemove = categoryContainingProduct.items.find(product => product.productId === action.product);
       if (!productToRemove) return state;
       productToRemove.addedToCart = false;
-      const newCart = state.cart.filter(product => product.id !== action.product);
+      const newCart = state.cart.filter(product => product.productId !== action.product);
       const { cartTotal, cartQuantity } = calculateCartTotals(newCart);
       return {
         ...state,
         categories: state.categories.map(category => ({
           ...category,
-          products: category.productDtos.map(p =>
-            p.id === productToRemove.id ? { ...p, addedToCart: false } : p
+          products: category.items.map(p =>
+            p.productId === productToRemove.productId ? { ...p, addedToCart: false } : p
           ),
         })),
         cart: newCart,
@@ -77,7 +77,9 @@ const reducer = (state: State, action: Action): State => {
     }
 
     case ActionTypes.ADD_QUANTITY: {
-      const productToAddQuantity = state.cart.find(product => product.id === action.product);
+
+
+      const productToAddQuantity = state.cart.find(product => product.productId === action.product);
       if (!productToAddQuantity) return state;
 
       productToAddQuantity.quantity = (productToAddQuantity.quantity || 0) + 1;
@@ -89,7 +91,7 @@ const reducer = (state: State, action: Action): State => {
     }
 
     case ActionTypes.REDUCE_QUANTITY: {
-      const productToReduceQuantity = state.cart.find(product => product.id === action.product);
+      const productToReduceQuantity = state.cart.find(product => product.productId === action.product);
       if (!productToReduceQuantity || (productToReduceQuantity.quantity || 0) <= 1) return state;
 
       productToReduceQuantity.quantity! -= 1;
@@ -130,9 +132,10 @@ const useStore = () => {
 
       const transformedData: Category[] = apiData.map((item: any, index: number) => ({
         ...item,
-        productDtos: item.productDtos.map((product: Product) => (
+        items: item.items.map((product: Product) => (
           {
             ...product,
+            price: parseFloat(product.price.toString()),
             rating: 5,
             times_bought: 0,
             product_image: product.imageUrl,
@@ -172,12 +175,12 @@ const useStore = () => {
       const user: UserResponse = getUserFromLocalStorage();
 
       const order = {
-        totalAmount: payload.cost_after_delivery_rate,
+        // totalAmount: payload.cost_after_delivery_rate,
         userId: payload.user_id,
-        orderItem: payload.items.map(item => ({
-          productId: item.id,
+        items: payload.items.map(item => ({
+          productId: item.productId,
           quantity: item.quantity,
-          price: item.price,
+          // price: item.price,
         })),
       };
 
@@ -185,10 +188,8 @@ const useStore = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${user.jwtToken}`
+          "Authorization": `Bearer ${user.token}`
         },
-        mode: "cors",
-        credentials: "include",
         body: JSON.stringify(
           order
         ),

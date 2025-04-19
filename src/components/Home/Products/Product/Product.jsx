@@ -17,12 +17,12 @@ const Product = ({ product }) => {
       toast.warning("You can only add 10 items to cart");
       return;
     }
-    store.addToCart(product?.id);
+    store.addToCart(product?.productId);
     toast.success(`${product?.name} added to cart`);
   };
 
   const handleRemoveFromCart = () => {
-    store.removeFromCart(product?.id);
+    store.removeFromCart(product?.productId);
     toast.error(`${product?.name} removed from cart`);
   };
 

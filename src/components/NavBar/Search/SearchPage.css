@@ -1,0 +1,26 @@
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.products-grid > * {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .products-grid > * {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid > * {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

@@ -43,7 +43,7 @@ const useOrders = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.jwtToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         mode: "cors",
         credentials: "include",
@@ -72,7 +72,7 @@ const useOrders = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.jwtToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         mode: "cors",
         credentials: "include",

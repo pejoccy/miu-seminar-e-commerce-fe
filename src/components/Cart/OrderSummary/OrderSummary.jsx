@@ -1,7 +1,7 @@
-import "./OrderSummary.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../../GlobalContext/GlobalContext";
+import "./OrderSummary.css";
 
 const OrderSummary = () => {
   const { store, modal, auth } = useGlobalContext();
@@ -22,7 +22,7 @@ const OrderSummary = () => {
         store.state.cartTotal + (deliveryType == "Standard" ? 5 : 10),
       promoCode: "",
       phoneNumber: phone,
-      user_id: auth.state.user?.id,
+      user_id: auth.state.user?.sub,
     };
 
     const response = await store.confirmOrder(payload);

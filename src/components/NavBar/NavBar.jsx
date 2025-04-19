@@ -1,9 +1,9 @@
+import Hamburger from "hamburger-react";
 import Account from "./Account/Account";
 import Links from "./Links/Links";
 import Logo from "./Logo/Logo";
-import Search from "./Search/Search";
-import Hamburger from "hamburger-react";
 import "./NavBar.css";
+import Search from "./Search/Search";
 
 const NavBar = () => {
   const handleHamClick = () => {
@@ -34,7 +34,7 @@ const NavBar = () => {
         <span className="desktop-links">
           <Links></Links>
         </span>
-        {/* <Search></Search> */}
+        <Search></Search>
         <Account></Account>
       </div>
       <div className="nav-mobile">

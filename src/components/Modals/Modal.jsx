@@ -1,9 +1,8 @@
-import React from "react";
-import { toast } from "react-toastify";
-import "./Modal.css";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { toast } from "react-toastify";
 import { useGlobalContext } from "../GlobalContext/GlobalContext";
+import "./Modal.css";
 
 const Modal = ({ header, submitAction, buttonText, isRegister }) => {
   const { auth } = useGlobalContext();
@@ -34,7 +33,7 @@ const Modal = ({ header, submitAction, buttonText, isRegister }) => {
     // register or login
     if (isRegister) {
       const registrationData = {
-        name: data.username,
+        username: data.username,
         email: data.email,
         password: data.password,
       };

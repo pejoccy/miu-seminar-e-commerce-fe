@@ -1,10 +1,10 @@
+import EmptyState from "./EmptyState/EmptyState";
 import OrderDetails from "./OrderDetails/OrderDetails";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import EmptyState from "./EmptyState/EmptyState";
 
 
-import "./Order.css";
 import { useGlobalContext } from "../GlobalContext/GlobalContext";
+import "./Order.css";
 
 const Order = () => {
   let { store } = useGlobalContext();
@@ -21,7 +21,7 @@ const Order = () => {
             store.state.cart.map((product) => {
               return (
                 <OrderDetails
-                  key={product.id}
+                  key={product.productId}
                   product={product}
                 ></OrderDetails>
               );

@@ -1,7 +1,7 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import "./Account.css";
 import { useGlobalContext } from "../../GlobalContext/GlobalContext";
+import "./Account.css";
 
 const Account = () => {
   let { auth, store, modal } = useGlobalContext();
@@ -16,6 +16,8 @@ const Account = () => {
     auth.logout();
   };
 
+  console.log("auth.state.user", auth.state.user);
+
   return (
     <div className="account">
       <div className="cart">
@@ -24,7 +26,7 @@ const Account = () => {
             <span className="account-user">Guest</span>
           ) : (
             <span className="account-user">
-              {auth.state.user.name}
+              {auth.state.user["custom:username"]}
             </span>
           )}
           <span className="account-details">
