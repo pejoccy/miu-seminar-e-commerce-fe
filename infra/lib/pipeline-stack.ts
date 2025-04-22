@@ -1,8 +1,8 @@
 import { aws_s3, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CodePipeline, CodePipelineSource, CodeBuildStep } from 'aws-cdk-lib/pipelines';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { StaticSiteStage } from './site-stage';
-// import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 
 export class PipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -44,12 +44,12 @@ export class PipelineStack extends Stack {
           "npm run build",
           "npx cdk synth"
         ],
-        // rolePolicyStatements: [
-        //   new PolicyStatement({
-        //     actions: ['ssm:GetParameter'],
-        //     resources: ['arn:aws:ssm:*:*:/cs516-project-api/api-url'],
-        //   }),
-        // ],
+        rolePolicyStatements: [
+          new PolicyStatement({
+            actions: ['ssm:GetParameter'],
+            resources: ['arn:aws:ssm:*:*:/cs516-project-api/api-url'],
+          }),
+        ],
       }),
     });
 
