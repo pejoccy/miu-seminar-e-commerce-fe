@@ -35,8 +35,11 @@ export class PipelineStack extends Stack {
         commands: [
           // 1. Set it as a React env var (REACT_APP_* gets embedded at build time)
           'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
+          
+          // 2. Change directory 
+          "cd infra",
 
-          // 2. Install, build, synth
+          // 3. Install, build, synth
           "npm ci",
           "npm run build",
           "npx cdk synth"
