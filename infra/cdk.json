@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/cs516-project-fe.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/cs516-project-site.ts",
   "watch": {
     "include": [
       "**"

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
 import * as dotenv from 'dotenv';
-import { StaticSiteStack } from '../lib/site-stack';
+import { PipelineStack } from '../lib/pipeline-stack';
 
 dotenv.config();
 
 const app = new cdk.App();
-new StaticSiteStack(app, 'Cs516ProjectSiteStack', {
+new PipelineStack(app, 'Cs516ProjectSitePipelineStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
