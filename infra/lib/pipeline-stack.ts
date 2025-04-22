@@ -50,12 +50,12 @@ export class PipelineStack extends Stack {
           "ls -l",
           "npx cdk synth"
         ],
-        rolePolicyStatements: [
-          new PolicyStatement({
-            actions: ['ssm:GetParameter'],
-            resources: ['arn:aws:ssm:*:*:/cs516-project-api/api-url'],
-          }),
-        ],
+        // rolePolicyStatements: [
+        //   new PolicyStatement({
+        //     actions: ['ssm:GetParameter'],
+        //     resources: ['arn:aws:ssm:*:*:/cs516-project-api/api-url'],
+        //   }),
+        // ],
       }),
     });
 
