@@ -39,6 +39,7 @@ export class PipelineStack extends Stack {
           // 2. Change directory 
           "pwd",
           "cd infra",
+          "ls -l",
 
           // 3. Install, build, synth
           "npm ci",
