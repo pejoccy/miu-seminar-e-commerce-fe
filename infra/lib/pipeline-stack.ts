@@ -16,8 +16,8 @@ export class PipelineStack extends Stack {
       autoDeleteObjects: true,
     });
     
-    const pipeline = new CodePipeline(this, "SitePipeline", {
-      pipelineName: "SitePipeline",
+    const pipeline = new CodePipeline(this, "CS516ProjectSitePipeline", {
+      pipelineName: "CS516ProjectSitePipeline",
       artifactBucket,
       synth: new CodeBuildStep("Synth", {
         input: CodePipelineSource.connection(
@@ -34,16 +34,20 @@ export class PipelineStack extends Stack {
         ],
         commands: [
           // 1. Set it as a React env var (REACT_APP_* gets embedded at build time)
-          'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
+          // 'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
           
-          // 2. Change directory 
+          // 2. Site - Install, build
           "pwd",
-          "cd infra",
-          "ls -l",
-
-          // 3. Install, build, synth
           "npm ci",
           "npm run build",
+          "pwd",
+          "ls -l",
+          
+          // 3. Synth infra
+          "cd infra",
+          "npm ci",
+          "pwd",
+          "ls -l",
           "npx cdk synth"
         ],
         rolePolicyStatements: [

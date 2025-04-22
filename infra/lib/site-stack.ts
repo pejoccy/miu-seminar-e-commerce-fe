@@ -13,11 +13,12 @@ export class StaticSiteStack extends Stack {
     const siteBucket = createSiteS3Bucket(this, [apiURL]);
     const distribution = createCloudFrontDistro(this, siteBucket);
 
-    // const assetSrc = path.join(__dirname, '../../build');
+    const assetSrc = path.join(__dirname, '../build');
+    console.log({assetSrc});
 
     // Upload site contents from build output
     new aws_s3_deployment.BucketDeployment(this, 'DeployWebsite', {
-      sources: [Source.asset('../../build')],
+      sources: [Source.asset('../build')],
       destinationBucket: siteBucket,
       distribution,
       distributionPaths: ['/*'], // N.B. invalidate everything
