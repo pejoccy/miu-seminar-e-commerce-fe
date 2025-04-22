@@ -1,7 +1,7 @@
 import { aws_s3, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { CodePipeline, CodePipelineSource, CodeBuildStep } from 'aws-cdk-lib/pipelines';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import * as pipelines from 'aws-cdk-lib/pipelines';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import { StaticSiteStage } from './site-stage';
 
 export class PipelineStack extends Stack {
@@ -16,11 +16,11 @@ export class PipelineStack extends Stack {
       autoDeleteObjects: true,
     });
     
-    const pipeline = new CodePipeline(this, "CS516ProjectSitePipeline", {
+    const pipeline = new pipelines.CodePipeline(this, "CS516ProjectSitePipeline", {
       pipelineName: "CS516ProjectSitePipeline",
       artifactBucket,
-      synth: new CodeBuildStep("Synth", {
-        input: CodePipelineSource.connection(
+      synth: new pipelines.CodeBuildStep("Synth", {
+        input: pipelines.CodePipelineSource.connection(
           "pejoccy/miu-seminar-e-commerce-fe",
           "main",
           {
@@ -35,7 +35,8 @@ export class PipelineStack extends Stack {
         commands: [
           // 1. Set it as a React env var (REACT_APP_* gets embedded at build time)
           // 'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
-          
+          'echo "API URL:" $REACT_APP_API_URL',
+
           // 2. Site - Install, build
           "pwd",
           "npm ci",
@@ -50,12 +51,12 @@ export class PipelineStack extends Stack {
           "ls -l",
           "npx cdk synth"
         ],
-        // rolePolicyStatements: [
-        //   new PolicyStatement({
-        //     actions: ['ssm:GetParameter'],
-        //     resources: ['arn:aws:ssm:*:*:/cs516-project-api/api-url'],
-        //   }),
-        // ],
+        rolePolicyStatements: [
+          new iam.PolicyStatement({
+            actions: ['ssm:GetParameter'],
+            resources: ['arn:aws:ssm:us-east-1:390402552664:parameter/cs516-project-api/api-url'],
+          }),
+        ],
       }),
     });
 
