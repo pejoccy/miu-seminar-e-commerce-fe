@@ -37,6 +37,7 @@ export class PipelineStack extends Stack {
           'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
           
           // 2. Change directory 
+          "pwd",
           "cd infra",
 
           // 3. Install, build, synth
