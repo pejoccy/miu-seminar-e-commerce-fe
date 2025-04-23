@@ -2,7 +2,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as dotenv from 'dotenv';
 import { PipelineStack } from '../lib/pipeline-stack';
-import { StaticSiteStack } from '../lib/site-stack';
+// import { StaticSiteStack } from '../lib/site-stack';
 
 dotenv.config();
 
