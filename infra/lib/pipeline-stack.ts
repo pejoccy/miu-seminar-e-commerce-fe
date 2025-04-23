@@ -45,6 +45,7 @@ export class PipelineStack extends Stack {
           "ls -l",
           "cdk synth -c apiUrl=$REACT_APP_API_URL"
         ],
+        primaryOutputDirectory: "infra/cdk.out",
         rolePolicyStatements: [
           new iam.PolicyStatement({
             actions: ['ssm:GetParameter'],
