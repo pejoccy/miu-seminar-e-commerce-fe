@@ -8,7 +8,8 @@ export class PipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const connectionArn = process.env.REPO_CONNECTION_ARN!;
+    // const connectionArn = process.env.REPO_CONNECTION_ARN!;
+    const connectionArn = 'arn:aws:codeconnections:us-east-1:390402552664:connection/658c4581-2178-42ab-a9f7-61f0c0cde207';
     
     const pipeline = new pipelines.CodePipeline(this, "CS516ProjectSitePipeline", {
       pipelineName: "CS516ProjectSitePipeline",
