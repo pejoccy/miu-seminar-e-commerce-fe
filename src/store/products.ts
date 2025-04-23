@@ -127,7 +127,7 @@ const useStore = () => {
 
   const handleData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/categories`);
+      const response = await fetch(`${baseUrl}categories`);
       const apiData: Category[] = await response.json();
 
       const transformedData: Category[] = apiData.map((item: any, index: number) => ({
@@ -184,7 +184,7 @@ const useStore = () => {
         })),
       };
 
-      const response = await fetch(`${baseUrl}/orders`, { //calling order create order API
+      const response = await fetch(`${baseUrl}orders`, { //calling order create order API
         method: "POST",
         headers: {
           "Content-Type": "application/json",

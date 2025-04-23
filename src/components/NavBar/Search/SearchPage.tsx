@@ -36,7 +36,7 @@ const SearchPage = () => {
             setLoading(true);
             setError("");
             try {
-                const res = await fetch(`${baseUrl}/products?keyword=${encodeURIComponent(keyword)}`);
+                const res = await fetch(`${baseUrl}products?keyword=${encodeURIComponent(keyword)}`);
                 if (!res.ok) throw new Error("Failed to fetch products");
                 const data = await res.json();
                 const transformed = data.map((product: Product) => ({

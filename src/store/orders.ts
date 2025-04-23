@@ -38,7 +38,7 @@ const useOrders = () => {
   const getOrders = async () => {
     const user: UserResponse = getUserFromLocalStorage();
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/orders/me`,
+      `${process.env.REACT_APP_BASE_URL}orders/me`,
       {
         method: "GET",
         headers: {
@@ -67,7 +67,7 @@ const useOrders = () => {
   const cancelOrder = async (order_id: string) => {
     const user: UserResponse = getUserFromLocalStorage();
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/orders/${order_id}`,
+      `${process.env.REACT_APP_BASE_URL}orders/${order_id}`,
       {
         method: "PUT",
         headers: {

@@ -49,7 +49,7 @@ const useAuth = () => {
 
   const register = async (userInfo: { username: string; email: string; password: string; }) => {
     try {
-      const response = await fetch(`${baseUrl}/register`, {
+      const response = await fetch(`${baseUrl}register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const useAuth = () => {
 
   const login = async (userInfo: { email: string; password: string; }) => {
     try {
-      const response = await fetch(`${baseUrl}/login`, {
+      const response = await fetch(`${baseUrl}login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
