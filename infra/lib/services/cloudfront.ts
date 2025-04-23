@@ -12,6 +12,8 @@ export function createCloudFrontDistro(
   });
 
   siteBucket.grantPublicAccess();
+
+  
   siteBucket.grantRead(originAccessIdentity);
   
   return new cloudfront.Distribution(scope, 'SiteDistribution', {

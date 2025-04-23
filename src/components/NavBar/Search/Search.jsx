@@ -16,7 +16,7 @@ const Search = () => {
     <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", border: "1px solid #ccc", borderRadius: "8px", overflow: "hidden", boxShadow: "0 2px 4px rgba(0,0,0,0.15)", width: "100%", maxWidth: "400px", height: "44px" }}>
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search 123"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         style={{
