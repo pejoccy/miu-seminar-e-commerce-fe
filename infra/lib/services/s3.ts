@@ -5,11 +5,10 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 export function createSiteS3Bucket(scope: Construct, allowedOrigins: string[]): s3.Bucket {
   const siteBucket = new s3.Bucket(scope, 'SiteBucket', {
     bucketName: 'cs516-project-site',
-    websiteIndexDocument: 'index.html',
-    websiteErrorDocument: 'index.html',
-    publicReadAccess: false,
     removalPolicy: RemovalPolicy.DESTROY,
     autoDeleteObjects: true,
+    publicReadAccess: false,
+    blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
   });
 
   siteBucket.addCorsRule({
