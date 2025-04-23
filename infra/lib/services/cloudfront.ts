@@ -8,21 +8,24 @@ export function createCloudFrontDistro(
   scope: Construct,
   siteBucket: s3.Bucket,
 ): cloudfront.Distribution {
-  const originAccessControl = new cloudfront.S3OriginAccessControl(scope, 'OAC', {
-    signing: {
-      behavior: cloudfront.SigningBehavior.ALWAYS,
-      protocol: cloudfront.SigningProtocol.SIGV4,
-    },
-    originAccessControlName: 'S3OriginAccessControl',
+  const originAccessControl = new cloudfront.CfnOriginAccessControl(scope, 'SiteOAC', {
+    originAccessControlConfig: {
+      name: 'StaticSiteOAC',
+      signingBehavior: 'always',
+      signingProtocol: 'sigv4',
+      originAccessControlOriginType: cloudfront.OriginAccessControlOriginType.S3,
+
+    }
   });
-  
+
   const distribution = new cloudfront.Distribution(scope, 'SiteDistribution', {
     defaultBehavior: {
       origin: new origins.S3Origin(siteBucket, {
-        originAccessControlId: originAccessControl.originAccessControlId,
+        originAccessControlId: originAccessControl.attrId,
       }),
       viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
     },
+    defaultRootObject: 'index.html',
   });
 
   siteBucket.addToResourcePolicy(new iam.PolicyStatement({
