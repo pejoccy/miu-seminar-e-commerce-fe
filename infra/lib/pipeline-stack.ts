@@ -28,8 +28,8 @@ export class PipelineStack extends Stack {
         ],
         commands: [
           // 1. Set it as a React env var (REACT_APP_* gets embedded at build time)
-          // 'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --with-decryption --query "Parameter.Value" --output text)',
-          'echo "API URL:" $REACT_APP_API_URL',
+          'export REACT_APP_API_URL=$(aws ssm get-parameter --name "/cs516-project-api/api-url" --query "Parameter.Value" --output text)',
+          'echo "API URL: $REACT_APP_API_URL"',
 
           // 2. Site - Install, build
           "pwd",
