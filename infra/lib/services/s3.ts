@@ -9,7 +9,12 @@ export function createSiteS3Bucket(scope: Construct, allowedOrigins: string[]): 
     websiteErrorDocument: 'index.html',
     removalPolicy: RemovalPolicy.DESTROY,
     autoDeleteObjects: true,
-    blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+    blockPublicAccess: {
+      blockPublicPolicy: false,
+      blockPublicAcls: true,
+      ignorePublicAcls: true,
+      restrictPublicBuckets: false,
+    }
   });
 
   siteBucket.addCorsRule({
