@@ -9,7 +9,6 @@ export function createSiteS3Bucket(scope: Construct, allowedOrigins: string[]): 
     websiteErrorDocument: 'index.html',
     removalPolicy: RemovalPolicy.DESTROY,
     autoDeleteObjects: true,
-    publicReadAccess: false,
     blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
   });
 
