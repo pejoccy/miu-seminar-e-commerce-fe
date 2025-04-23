@@ -8,7 +8,7 @@ export class StaticSiteStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const apiURL = process.env.REACT_APP_API_URL!;
+    const apiURL = this.node.tryGetContext('apiUrl') as string;
 
     const siteBucket = createSiteS3Bucket(this, [apiURL]);
     const distribution = createCloudFrontDistro(this, siteBucket);

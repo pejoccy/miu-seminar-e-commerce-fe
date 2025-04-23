@@ -49,7 +49,7 @@ export class PipelineStack extends Stack {
           "npm ci",
           "pwd",
           "ls -l",
-          "npx cdk synth"
+          "cdk synth -c apiUrl=$REACT_APP_API_URL"
         ],
         rolePolicyStatements: [
           new iam.PolicyStatement({
@@ -59,6 +59,8 @@ export class PipelineStack extends Stack {
         ],
       }),
     });
+
+    artifactBucket.grantReadWrite(pipeline.pipeline.role!);
 
     pipeline.addStage(new StaticSiteStage(this, 'DeployStaticSite'));
   }
