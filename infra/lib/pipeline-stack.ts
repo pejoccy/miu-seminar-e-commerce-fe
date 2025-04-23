@@ -11,8 +11,16 @@ export class PipelineStack extends Stack {
     // const connectionArn = process.env.REPO_CONNECTION_ARN!;
     const connectionArn = 'arn:aws:codeconnections:us-east-1:390402552664:connection/658c4581-2178-42ab-a9f7-61f0c0cde207';
     
+    const artifactBucket = new aws_s3.Bucket(this, 'ArtifactBucket', {
+      versioned: false,
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+      bucketName: `${scope.node.id}ArtifactBucket`,
+    });
+
     const pipeline = new pipelines.CodePipeline(this, "CS516ProjectSitePipeline", {
       pipelineName: "CS516ProjectSitePipeline",
+      artifactBucket,
       synth: new pipelines.CodeBuildStep("Synth", {
         input: pipelines.CodePipelineSource.connection(
           "pejoccy/miu-seminar-e-commerce-fe",
