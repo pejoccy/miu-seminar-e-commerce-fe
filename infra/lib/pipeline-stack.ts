@@ -15,7 +15,7 @@ export class PipelineStack extends Stack {
       versioned: false,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
-      bucketName: 'cs516-project-artifact-bucket',
+      bucketName: 'cs516-project-site-artifact-bucket',
     });
 
     const pipeline = new pipelines.CodePipeline(this, "CS516ProjectSitePipeline", {
